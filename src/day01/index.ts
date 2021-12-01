@@ -1,36 +1,31 @@
 import run from "aocrunner";
 
-const parseInput = (rawInput: string) => rawInput;
+const parseInput = (rawInput: string) =>
+  rawInput.split("\n").map((val) => parseInt(val, 10));
 
 const part1 = (rawInput: string) => {
-  const input = parseInput(rawInput);
+  const values = parseInput(rawInput);
 
-  const values = input.split("\n").map((val) => parseInt(val, 10));
-
-  const reducer = (
-    count: number,
-    value: number,
-    index: number,
-    array: number[],
-  ) => {
-    if (index === 0) return 0;
-    const increase = value > array[index - 1];
-    return count + Number(increase);
-  };
-
-  return values.reduce(reducer, 0);
-};
-
-const part2 = (rawInput: string) => {
-  const input = parseInput(rawInput);
-
-  const values = input.split("\n").map((val) => parseInt(val, 10));
+  const max = values.length - 1;
 
   let increases = 0;
 
-  for (let i = 0; i < values.length - 2; i++) {
-    const increase = values[i + 3] > values[i];
-    increases += Number(increase);
+  for (let i = 0; i < max; i++) {
+    values[i + 1] > values[i] && increases++;
+  }
+
+  return increases;
+};
+
+const part2 = (rawInput: string) => {
+  const values = parseInput(rawInput);
+
+  const max = values.length - 2;
+
+  let increases = 0;
+
+  for (let i = 0; i < max; i++) {
+    values[i + 3] > values[i] && increases++;
   }
 
   return increases;
