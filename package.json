@@ -6,7 +6,8 @@
   "scripts": {
     "start": "aocrunner day",
     "build": "aocrunner build",
-    "format": "prettier -w src"
+    "format": "prettier -w src",
+    "kill": "kill $(ps | grep \"yarn start\" | cut -d ' ' -f1)"
   },
   "keywords": [
     "aoc"
